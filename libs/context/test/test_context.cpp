@@ -51,8 +51,8 @@ void fn2( std::string const& str)
 void fn3( std::string const& str)
 {
     X x( str);
-    void * vp = gctx.suspend( & value1);
-    value1 = * static_cast< int * >( vp);
+    intptr_t vp = gctx.suspend( value1);
+    value1 = vp;
     gctx.suspend();
 }
 
@@ -130,13 +130,13 @@ void test_case_5()
         boost::contexts::default_stacksize(),
         boost::contexts::stack_unwind, boost::contexts::return_to_caller);
     BOOST_CHECK( ! gctx.is_complete() );
-    void * vp = gctx.start();
-    BOOST_CHECK_EQUAL( vp, & value1);
+    intptr_t vp = gctx.start();
+    BOOST_CHECK_EQUAL( vp, value1);
     BOOST_CHECK_EQUAL( 1, value1);
     BOOST_CHECK( ! gctx.is_complete() );
     int x = 7;
     vp = 0;
-    vp = gctx.resume( & x);
+    vp = gctx.resume( x);
     BOOST_CHECK_EQUAL( 7, value1);
     BOOST_CHECK( ! vp);
     BOOST_CHECK( ! gctx.is_complete() );

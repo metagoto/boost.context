@@ -7,10 +7,12 @@
 
 [section:continuation Continuation]
 
-Adapted from [@https://code.google.com/p/jyield/wiki/Samples Java continuation] documentation example. 
+Adapted from [@https://code.google.com/p/jyield/wiki/Samples the Java
+continuation] documentation example. 
 
-Class `continuation` provides the ability for functor objects to suspend itself.
-The functor is required to accept a const reference to its own `continuation` instance.
+Class `continuation` provides the ability for a functor to suspend itself.
+The functor is required to accept a const reference to its own `continuation`
+instance.
 
     class continuation
     {
@@ -27,7 +29,8 @@ The functor is required to accept a const reference to its own `continuation` in
             ctx_(
                 & continuation::trampoline_, this,
                 boost::contexts::default_stacksize(),
-                boost::contexts::no_stack_unwind, boost::contexts::return_to_caller),
+                boost::contexts::no_stack_unwind,
+				boost::contexts::return_to_caller),
                 false),
             fn_( fn), started_( false)
         {}
@@ -50,7 +53,8 @@ The functor is required to accept a const reference to its own `continuation` in
     };
 
 
-The functions `first()` and `second()` are so-called coroutines running 'in parallel'.
+The functions `first()` and `second()` are so-called coroutines running 'quasi
+parallel'.
 Please note that the variables in the for-loops have local scope.
 
     void first( continuation & c)
@@ -91,5 +95,9 @@ Please note that the variables in the for-loops have local scope.
 
         return EXIT_SUCCESS;
     }
+
+	output:
+		started first! started second! a0 b0 a1 b1 a2 b2 a3 b3 a4 b4 a5 b5 a6 b6 a7 b7 a8 b8 a9 b9 
+		Done
 
 [endsect]

@@ -12,7 +12,7 @@ Thinking Asynchronously in C++] using boost.asio to implement a simple echo
 server.
 
 Chris Kohlhoff uses stackless coroutines based on preprocessor-based switch
-statements to implement a echo server using boost.asio.
+statements to implement an echo server using boost.asio.
 Class `continuation` provides a simple coroutine implemenatation using
 boost.context.
 
@@ -56,18 +56,19 @@ The operator `server::operator()` is called by the asio reactor and jumps to
 coroutine (which is entering or resuming in function `server::do_()`).
 In function `sever::do_()` the control flow is all in one place and easy to
 follow; *this is queued for accepting a connection before control flow
-is passed back to the reactor via `suspend()`. If `server::do_()` is reentered a
-local buffer is created and a asynch. read operation is queued into the reactor.
+is passed back to the reactor via `suspend()`. If `server::do_()` is reentered,
+a local buffer is created and an asynch. read operation is queued into the
+reactor.
 The control flow is then returned to the reactor for io-multiplexing again.
 After some bytes were received `server::do_()` is reentred again starting a
 asynch. write operation.
 
-The adavantage over the ordinary `bind()`-version is that the state of execution
+The advantage over the ordinary `bind()` version is that the state of execution
 is preserved so that variables used by the read/write operations may have local
 scope. Stackfull coroutines (as boost.context provides) enable
-application-protocol stacks which can be easier implemented.
-For instance if a message is partialy received (some bytes are outstanding
-before message can be parser or serviced) then the current state can be easily
+application-protocol stacks which can be more easily implemented.
+For instance, if only part of a message is received (some bytes are outstanding
+before message can be parsed or serviced), then the current state can be easily
 suspended/preserved (even from nested functions of the protocol stack)
 until the remaining bytes are received.
 

@@ -33,7 +33,7 @@ protected:
 
     void yield_return( T const& v)
     {
-        void * vp = ( void *) & v;
+        intptr_t vp = reinterpret_cast< intptr_t >( & v);
         ctx_.suspend( vp);
     }
 
@@ -62,7 +62,7 @@ public:
 
     bool get( T & result)
     {
-        void * vp = 0;
+        intptr_t vp = 0;
         if ( ! started_)
         {
             started_ = true;
@@ -72,7 +72,7 @@ public:
         {
             vp = ctx_.resume();
         }
-        if ( vp) result = * static_cast< T * >( vp);
+        if ( vp) result = * reinterpret_cast< T * >( vp);
         return ! ( complete_ || ctx_.is_complete() );
     }
 };
