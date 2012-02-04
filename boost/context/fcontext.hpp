@@ -8,6 +8,7 @@
 #define BOOST_CONTEXTS_FCONTEXT_H
 
 #include <boost/config.hpp>
+#include <boost/cstdint.hpp>
 
 #include <boost/context/detail/config.hpp>
 
@@ -49,9 +50,9 @@
 #endif
 
 extern "C" BOOST_CONTEXT_DECL void * BOOST_CONTEXT_CALLDECL boost_fcontext_align( void * vp);
-extern "C" BOOST_CONTEXT_DECL void * BOOST_CONTEXT_CALLDECL boost_fcontext_start( boost_fcontext_t * ofc, boost_fcontext_t const* nfc);
-extern "C" BOOST_CONTEXT_DECL void * BOOST_CONTEXT_CALLDECL boost_fcontext_jump( boost_fcontext_t * ofc, boost_fcontext_t const* nfc, void * vp);
-extern "C" BOOST_CONTEXT_DECL void BOOST_CONTEXT_CALLDECL boost_fcontext_make( boost_fcontext_t * fc, void (* fn)( void *), void * p);
+extern "C" BOOST_CONTEXT_DECL intptr_t BOOST_CONTEXT_CALLDECL boost_fcontext_start( boost_fcontext_t * ofc, boost_fcontext_t const* nfc);
+extern "C" BOOST_CONTEXT_DECL intptr_t BOOST_CONTEXT_CALLDECL boost_fcontext_jump( boost_fcontext_t * ofc, boost_fcontext_t const* nfc, intptr_t vp);
+extern "C" BOOST_CONTEXT_DECL void BOOST_CONTEXT_CALLDECL boost_fcontext_make( boost_fcontext_t * fc, void (* fn)( intptr_t), intptr_t vp);
 
 #ifdef BOOST_HAS_ABI_HEADERS
 # include BOOST_ABI_SUFFIX

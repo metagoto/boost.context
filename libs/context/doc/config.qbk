@@ -11,11 +11,12 @@
 [@http://github.com/olk/boost.context git repo]
 * extract the archive into the boost-source directory
 
-The only supported compilers are GCC, Intel and MSVC. On POSIX and Windows systems, GNU AS and MASM
-are respectively required for the assembler implementation of __boost_context__.
+__boost_context__ must be built for the particular compiler(s) and CPU architecture(s)s
+being targeted. __boost_context__ includes assembly code and, therefore, requires
+GNU AS for supported POSIX systems, and MASM for Windows systems.
 
-[note Because __boost_build__ provides the architecture, instruction-set and
-address-model as optional properites (not set by __boost_build__) you have to specify them at bjam command-line.]
+[note The architecture, instruction set, and address model are optional __boost_build__
+properties that must be given on the bjam command line, as shown in the table below.] 
 
 [table
     [[][]]
@@ -61,21 +62,5 @@ address-model as optional properites (not set by __boost_build__) you have to sp
         [X86_64, Windows, ms, pe]
         [bjam toolset = msvc-10.0 architecture = x86 instruction-set = yorksfield address-model = 64]
     ]
-]
-[/
-If desired you can use the native implementation provided by the operating system by defining a
-special preprocoessor macro:
-
-[table
-    [[]]
-    [
-        [POSIX (ucontext_t is obsolete since POSIX 2003, removed in POSIX 2008)]
-        [bjam toolset = gcc ... cxxflags = "-DBOOST_CONTEXT_UCTX"]
-    ]
-    [
-        [Windows]
-        [bjam toolset = msvc-10.0 ... cxxflags = "-DBOOST_CONTEXT_FIBER"]
-    ]
-]
 ]
 [endsect]

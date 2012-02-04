@@ -27,7 +27,7 @@ extern "C" BOOST_CONTEXT_DECL void * BOOST_CONTEXT_CALLDECL boost_fcontext_align
 }
 
 # if !defined(__arm__) && !defined(__powerpc__)
-extern "C" BOOST_CONTEXT_DECL void * BOOST_CONTEXT_CALLDECL boost_fcontext_start( boost_fcontext_t * ofc, boost_fcontext_t const* nfc)
+extern "C" BOOST_CONTEXT_DECL intptr_t BOOST_CONTEXT_CALLDECL boost_fcontext_start( boost_fcontext_t * ofc, boost_fcontext_t const* nfc)
 { return boost_fcontext_jump( ofc, nfc, 0); }
 #endif
 

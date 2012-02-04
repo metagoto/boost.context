@@ -9,12 +9,13 @@ context/stack/stack_helper.html
 context/capi.html
 context/capi/boost_fcontext.html
 context/examples.html
-context/examples/enumarator.html
+context/examples/enumerator.html
 context/examples/continuation.html
 context/examples/asio.html
 context/performance.html
 context/tested.html
 context/rationale.html
+context/rationale/other_apis_.html
 context/reference.html
 context/todo.html
 context/acknowledgements.html

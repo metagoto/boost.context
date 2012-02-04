@@ -10,6 +10,7 @@
 #include <boost/assert.hpp>
 #include <boost/bind.hpp>
 #include <boost/config.hpp>
+#include <boost/cstdint.hpp>
 #include <boost/move/move.hpp>
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/type_traits/is_convertible.hpp>
@@ -275,19 +276,19 @@ BOOST_PP_REPEAT_FROM_TO( 1, BOOST_CONTEXT_ARITY, BOOST_CONTEXT_CTOR, ~)
     void swap( context & other)
     { impl_.swap( other.impl_); }
 
-    void * start()
+    intptr_t start()
     {
         BOOST_ASSERT( impl_);
         return impl_->start();
     }
 
-    void * resume( void * vp = 0)
+    intptr_t resume( intptr_t vp = 0)
     {
         BOOST_ASSERT( impl_);
         return impl_->resume( vp);
     }
 
-    void * suspend( void * vp = 0)
+    intptr_t suspend( intptr_t vp = 0)
     {
         BOOST_ASSERT( impl_);
         return impl_->suspend( vp);
